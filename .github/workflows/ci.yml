@@ -1,9 +1,12 @@
 name: CI
 
 on:
-  pull_request:
   push:
-    branches: [ main ]
+    branches: ["main"]
+    tags:
+      - "*"
+  pull_request:
+    branches: ["main"]
 
 jobs:
   scan_ruby:
@@ -120,10 +123,10 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           labels: |
-            "service=open-gas"
+            "service=sipario"
           tags: |
-            baldarn/open-gas:latest
-            baldarn/open-gas:${{ github.ref_name }}
+            baldarn/sipario:latest
+            baldarn/sipario:${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -145,7 +148,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.5
+          ruby-version: .ruby-version
           bundler-cache: true
       - uses: webfactory/ssh-agent@v0.9.0
         with:
