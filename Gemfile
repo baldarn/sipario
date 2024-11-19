@@ -4,8 +4,8 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.0"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 2.1"
+# Use postgresql as the database for Active Record
+gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -42,6 +42,8 @@ gem "thruster", require: false
 gem "devise", "~> 4.9"
 gem "devise-i18n"
 gem "devise-jwt"
+# gem "activerecord-postgis-adapter", "~> 10.0"
+gem "activerecord-postgis-adapter", git: "https://github.com/StoneGod/activerecord-postgis-adapter.git", branch: "rails-8"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

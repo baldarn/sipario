@@ -94,21 +94,21 @@ builder:
 #   user: app
 
 # Use accessory services (secrets come from .kamal/secrets).
-# accessories:
-#   db:
-#     image: postgis:17-3.5
-#     host: sipario.org
-#     port: 5432
-#     options:
-#       restart: always
-#     env:
-#       clear:
-#         POSTGRES_DB: sipario_production
-#         POSTGRES_USER: sipario
-#       secret:
-#         - POSTGRES_PASSWORD
-#     directories:
-#       - data:/var/lib/postgresql/data
+accessories:
+  db:
+    image: postgis/postgis:17-3.5
+    host: sipario.org
+    port: 5000
+    options:
+      restart: always
+    env:
+      clear:
+        POSTGRES_DB: sipario_production
+        POSTGRES_USER: sipario
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
 
 #   db:
 #     image: mysql:8.0

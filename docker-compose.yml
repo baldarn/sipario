@@ -1,0 +1,14 @@
+volumes:
+  db_storage:
+
+services:
+  db:
+    image: postgis/postgis:17-3.5
+    restart: unless-stopped
+    volumes:
+      - db_storage:/var/lib/postgresql/data
+    ports:
+      - ${PG_PORT:-5432}:5432
+    environment:
+      - POSTGRES_USER=sipario
+      - POSTGRES_PASSWORD=sipario

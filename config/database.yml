@@ -1,41 +1,36 @@
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem "sqlite3"
-#
 default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  adapter: postgis
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 10 } %>
+  host: <%= ENV.fetch('PG_HOST', 'localhost') %>
+  port: <%= ENV.fetch('PG_PORT', '5432') %>
+  username: <%= ENV.fetch('PG_USER', 'sipario') %>
+  password: <%= ENV.fetch('PG_PASSWORD', 'sipario') %>
+  encoding: unicode
+  schema_search_path: public
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: sipario_development
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: sipario_test
 
-
-# Store production database in the storage/ directory, which by default
-# is mounted as a persistent Docker volume in config/deploy.yml.
 production:
-  primary:
+  primary: &primary_production
     <<: *default
-    database: storage/production.sqlite3
+    database: sipario_production
+    username: sipario
+    password: <%= ENV["POSTGRES_PASSWORD"] %>
   cache:
-    <<: *default
-    database: storage/production_cache.sqlite3
+    <<: *primary_production
+    database: sipario_production_cache
     migrations_paths: db/cache_migrate
   queue:
-    <<: *default
-    database: storage/production_queue.sqlite3
+    <<: *primary_production
+    database: sipario_production_queue
     migrations_paths: db/queue_migrate
   cable:
-    <<: *default
-    database: storage/production_cable.sqlite3
+    <<: *primary_production
+    database: sipario_production_cable
     migrations_paths: db/cable_migrate
