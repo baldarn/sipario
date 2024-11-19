@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_19_081149) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_19_125622) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -19,6 +19,42 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_081149) do
     t.string "jti", null: false
     t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  end
+
+  create_table "owners", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.bigint "provider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_owners_on_email", unique: true
+    t.index ["provider_id"], name: "index_owners_on_provider_id"
+    t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_owners_on_unlock_token", unique: true
+  end
+
+  create_table "providers", force: :cascade do |t|
+    t.string "name"
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lonlat"], name: "index_providers_on_lonlat", using: :gist
   end
 
   create_table "users", force: :cascade do |t|

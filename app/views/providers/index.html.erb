@@ -1,0 +1,8 @@
+<h1>Providers</h1>
+
+<% @providers.each do |provider| %>
+  <%= render provider %>
+  <p>
+    <%= link_to "Show this provider", provider %>
+  </p>
+<% end %>

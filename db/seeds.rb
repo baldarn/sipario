@@ -7,3 +7,25 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+provider = Provider.create!(
+  name: "provider",
+  lonlat: "POINT(1 1)"
+)
+
+owner = Owner.create!(
+  email: "owner@email.com",
+  password: "password",
+  provider:
+)
+
+owner.skip_confirmation!
+owner.save!
+
+user = User.create!(
+  email: "user@email.com",
+  password: "password"
+)
+
+user.skip_confirmation!
+user.save!
