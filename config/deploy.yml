@@ -7,7 +7,11 @@ image: baldarn/sipario
 # Deploy to these servers.
 servers:
   web:
-    - sipario.org
+    hosts:
+      - sipario.org
+    options:
+      add-host: host.docker.internal:host-gateway
+
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -36,9 +40,10 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - APP_VERSION
+    - POSTGRES_PASSWORD
   clear:
     APP_HOST: sipario.org
-    PG_HOST: db
+    PG_HOST: host.docker.internal
     PG_PORT: 5000
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
@@ -100,9 +105,10 @@ accessories:
   db:
     image: postgis/postgis:17-3.5
     host: sipario.org
-    port: 5000
     options:
       restart: always
+      publish:
+        - 5000:5432
     env:
       clear:
         POSTGRES_DB: sipario_production

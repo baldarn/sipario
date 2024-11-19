@@ -20,7 +20,6 @@ production:
   primary: &primary_production
     <<: *default
     database: sipario_production
-    username: sipario
     password: <%= ENV["POSTGRES_PASSWORD"] %>
   cache:
     <<: *primary_production
