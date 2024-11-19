@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_18_105604) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_19_081149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "postgis"
 
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
