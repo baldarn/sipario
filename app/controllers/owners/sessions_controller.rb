@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Users
+module Owners
   class SessionsController < Devise::SessionsController
     skip_forgery_protection
     respond_to :json
