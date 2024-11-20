@@ -9,4 +9,8 @@ class HomeController < ApplicationController
 
   def index
   end
+
+  def download_apk
+    send_file("#{Rails.root}/public/sipario.apk")
+  end
 end
