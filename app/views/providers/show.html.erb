@@ -1,0 +1,29 @@
+<h2><%= @provider.name %></h2>
+<h3><%= I18n.t('providers.my_points') %>: <%= current_user.points_for_provider(@provider) %></h3>
+
+<h3><%= I18n.t('awards.header') %></h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><%= I18n.t('activerecord.attributes.awards.name') %></th>
+      <th scope="col"><%= I18n.t('activerecord.attributes.awards.description') %></th>
+      <th scope="col"><%= I18n.t('activerecord.attributes.awards.points_to_redeem') %></th>
+      <th scope="col"><%= I18n.t('actions') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @provider.awards.each do |award| %>
+      <tr>
+        <td><%= award.name %></td>
+        <td><%= award.description %></td>
+        <td><%= award.points_to_redeem %></td>
+        <td>
+          <%= link_to provider_award_redeem_path(@provider, award), class: 'text-decoration-none' do %>
+            <%= image_tag "cash.svg", aria: { hidden: true }, size: 24 %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= root_url %>">
+      <%= image_tag "logo.png", aria: { hidden: true }, height: 70, class: "bi d-block mx-auto mb-1" %>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <% if owner_signed_in? %>
+          <li class="nav-item">
+            <a href="<%= provider_awards_url(@provider) %>" class="nav-link text-secondary">
+              <%= image_tag "gift.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('awards.header' )%>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<%= edit_owner_registration_url %>" class="nav-link text-secondary">
+              <%= image_tag "profile.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('profile' )%>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<%= destroy_owner_session_url %>" class="nav-link text-secondary">
+              <%= image_tag "door.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('sign_out' )%>
+            </a>
+          </li>
+
+        <% elsif user_signed_in? %>
+          <li class="nav-item">
+            <a href="<%= point_events_url %>" class="nav-link text-secondary">
+              <%= image_tag "gift.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('point_events.header' )%>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<%= providers_url %>" class="nav-link text-secondary">
+              <%= image_tag "building.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('providers.header' )%>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<%= edit_user_registration_url %>" class="nav-link text-secondary">
+              <%= image_tag "profile.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('profile' )%>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<%= destroy_user_session_url %>" class="nav-link text-secondary">
+              <%= image_tag "door.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('sign_out' )%>
+            </a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a href="<%= user_session_url %>" class="nav-link text-secondary">
+              <%= image_tag "unlock.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('log_in_user' )%>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<%= new_user_registration_url %>" class="nav-link text-secondary">
+              <%= image_tag "door.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('sign_up_user' )%>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="<%= owner_session_url %>" class="nav-link text-secondary">
+              <%= image_tag "unlock.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('log_in_owner' )%>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<%= new_owner_registration_url %>" class="nav-link text-secondary">
+              <%= image_tag "door.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
+              <%= I18n.t('sign_up_owner' )%>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

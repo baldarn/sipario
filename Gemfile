@@ -14,8 +14,6 @@ gem "importmap-rails"
 gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
-# Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
-gem "tailwindcss-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
@@ -45,7 +43,13 @@ gem "devise-jwt"
 # gem "activerecord-postgis-adapter", "~> 10.0"
 gem "activerecord-postgis-adapter", git: "https://github.com/StoneGod/activerecord-postgis-adapter.git", branch: "rails-8"
 
+gem "sassc-rails"
+gem "bootstrap", "~> 5.1"
 gem "simple_form"
+
+# Pagination
+gem "kaminari"
+gem "kaminari-i18n"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

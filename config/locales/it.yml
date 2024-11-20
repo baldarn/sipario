@@ -1,0 +1,86 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
+it:
+  warnings: 
+    name: Attenzione
+    medical_certificate: Il certificato medico sta per scadere
+    membership: Il tesseramento sta per scadere
+    payment: Problemi nei pagamenti
+  problems: 
+    name: Problemi
+    medical_certificate: Il certificato medico è scaduto
+    membership: Il tesseramento è scaduto
+    payment: Problemi nei pagamenti
+  actions: Azioni
+  search: Cerca...
+  none: Nessuno
+  save: Salva
+  all: Tutto
+  dashboard: Dashboard
+  profile: Profilo
+  log_in_user: Log in Utente
+  sign_up_user: Registra Utente
+  log_in_owner: Log in Attività
+  sign_up_owner: Registra Attività
+  sign_out: Log out
+  awards:
+    header: Premi
+    new: Nuovo Premio
+    created: Premio creato
+    updated: Premio aggiornato
+    destroyed: Premio cancellato
+    redeemed: Premio riscosso!
+    too_few_points: Troppi pochi punti per riscuotere!
+  point_events:
+    header: Punti
+    total_points: Punti Totali
+    award: Premio
+  providers:
+    header: Attività
+    my_points: Punti con l'attività
+
+  activerecord:
+    attributes:
+      user:
+        name: Nome
+        email: Email
+      awards:
+        name: Nome
+        description: Descrizione
+        points_to_redeem: Punti necessari
+      point_events:
+        provider: Attività
+        points: Punti
+        award: Premio
+        created_at: Data
+      providers:
+       name: Nome
+       lonlat: Latitudine
+       minutes_for_points: Minuti per punti

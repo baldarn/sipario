@@ -1,0 +1,26 @@
+<h2><%= I18n.t('point_events.header') %></h2>
+
+<h3><%= I18n.t('point_events.total_points') %> <%= current_user.total_points %></h3>
+
+<%= paginate @point_events %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><%= I18n.t('activerecord.attributes.point_events.provider') %></th>
+      <th scope="col"><%= I18n.t('activerecord.attributes.point_events.award') %></th>
+      <th scope="col"><%= I18n.t('activerecord.attributes.point_events.points') %></th>
+      <th scope="col"><%= I18n.t('activerecord.attributes.point_events.created_at') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @point_events.each do |point_event| %>
+      <tr>
+        <td><%= link_to point_event.provider.name, provider_path(point_event.provider) %></td>
+        <td> <%= point_event.award&.name %></td>
+        <td><%= point_event.points %></td>
+        <td><%= point_event.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

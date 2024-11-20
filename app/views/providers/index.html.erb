@@ -1,8 +1,24 @@
-<h1>Providers</h1>
+<h2><%= I18n.t('providers.header') %></h2>
 
-<% @providers.each do |provider| %>
-  <%= render provider %>
-  <p>
-    <%= link_to "Show this provider", provider %>
-  </p>
-<% end %>
+<%= paginate @providers %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><%= I18n.t('activerecord.attributes.providers.name') %></th>
+      <th scope="col"><%= I18n.t('activerecord.attributes.providers.lonlat') %></th>
+      <th scope="col"><%= I18n.t('providers.my_points') %></th>
+      <th scope="col"><%= I18n.t('activerecord.attributes.providers.minutes_for_points') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @providers.each do |provider| %>
+      <tr>
+        <td><%= link_to provider.name, provider_url(provider) %></td>
+        <td><%= provider.lonlat %></td>
+        <td><%= current_user.points_for_provider(provider) %></td>
+        <td><%= provider.minutes_for_points %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

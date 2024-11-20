@@ -6,4 +6,5 @@ class Owner < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   belongs_to :provider
+  has_many :certified_presences
 end

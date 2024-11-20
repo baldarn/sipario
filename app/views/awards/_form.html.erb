@@ -1,0 +1,6 @@
+<%= simple_form_for [@provider, award] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :points_to_redeem, as: :integer %>
+  <%= f.button :submit, 'Salva Premio' %>
+<% end %>

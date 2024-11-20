@@ -1,0 +1,36 @@
+<h2><%= I18n.t('awards.header') %></h2>
+<div class="row">
+  <ul class="nav justify-content-end">
+    <li>
+      <%= link_to I18n.t('awards.new'), new_provider_award_path(@provider), class: 'btn btn-primary' %>
+    </li>
+  </ul>
+</div>
+<%= paginate @awards %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><%= I18n.t('activerecord.attributes.awards.name') %></th>
+      <th scope="col"><%= I18n.t('activerecord.attributes.awards.description') %></th>
+      <th scope="col"><%= I18n.t('activerecord.attributes.awards.points_to_redeem') %></th>
+      <th scope="col"><%= I18n.t('actions') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @awards.each do |award| %>
+      <tr>
+        <td><%= award.name %></td>
+        <td><%= truncate(award.description, length: 25) %></td>
+        <td><%= award.points_to_redeem %></td>
+        <td>
+          <%= link_to edit_provider_award_path(@provider, award), class: 'text-decoration-none' do %>
+            <%= image_tag "edit.svg", aria: { hidden: true }, size: 24 %>
+          <% end %>
+          <%= link_to provider_awards_path(@provider), data: { turbo_method: :delete, turbo_confirm: I18n.t('awards.confirm_destroy')}, class: 'text-decoration-none' do %>
+            <%= image_tag "trash.svg", aria: { hidden: true }, size: 24 %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

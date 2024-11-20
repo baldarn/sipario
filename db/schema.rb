@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_20_081732) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_20_100259) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
+
+  create_table "awards", force: :cascade do |t|
+    t.bigint "provider_id"
+    t.string "name", null: false
+    t.string "description", null: false
+    t.integer "points_to_redeem", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider_id"], name: "index_awards_on_provider_id"
+  end
 
   create_table "certified_presences", force: :cascade do |t|
     t.bigint "owner_id"
@@ -58,9 +68,24 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_081732) do
     t.index ["unlock_token"], name: "index_owners_on_unlock_token", unique: true
   end
 
+  create_table "point_events", force: :cascade do |t|
+    t.bigint "provider_id"
+    t.bigint "user_id"
+    t.bigint "sipario_session_id"
+    t.bigint "award_id"
+    t.integer "points", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["award_id"], name: "index_point_events_on_award_id"
+    t.index ["provider_id"], name: "index_point_events_on_provider_id"
+    t.index ["sipario_session_id"], name: "index_point_events_on_sipario_session_id"
+    t.index ["user_id"], name: "index_point_events_on_user_id"
+  end
+
   create_table "providers", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.integer "minutes_for_points", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lonlat"], name: "index_providers_on_lonlat", using: :gist
@@ -68,10 +93,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_081732) do
 
   create_table "sipario_sessions", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "device_identifier"
+    t.bigint "provider_id"
+    t.string "device_identifier", null: false
     t.text "nearby_identifiers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["provider_id"], name: "index_sipario_sessions_on_provider_id"
     t.index ["user_id"], name: "index_sipario_sessions_on_user_id"
   end
 

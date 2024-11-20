@@ -1,0 +1,17 @@
+<div id="flash" class="flash">
+  <% flash.each do |type, body| %>
+    <%
+    flash_class = case type
+                  when 'notice'
+                    'primary'
+                  when 'alert'
+                    'danger'
+                  else
+                    'dark'
+                  end
+    %>
+    <%= content_tag :div, class: "alert alert-#{flash_class}" do %>
+      <p><%= body %></p>
+    <% end %>
+  <% end %>
+</div>

@@ -12,13 +12,22 @@ Rails.application.routes.draw do
   devise_for :users
   resources :sipario_sessions, only: [ :create ]
 
-  devise_for :owners
+  devise_for :owners, controllers: {
+    registrations: "owners/registrations"
+  }
+
   resources :certified_presences, only: [ :create ]
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root to: "home#index"
+
+  resources :point_events, only: [ :index ]
 
   resources :providers do
+    resources :awards do
+      get :redeem
+    end
+
     collection do
       get :search
     end

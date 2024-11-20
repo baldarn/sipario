@@ -1,8 +1,10 @@
-class ProvidersController < ApplicationController
-  before_action :authenticate_owner!
-
+class ProvidersController < BaseUserController
   def index
-    @providers = Provider.all
+    @providers = Provider.page(params[:page])
+  end
+
+  def show
+    @provider = Provider.find(params[:id])
   end
 
   def search
