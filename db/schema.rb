@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_19_125622) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_20_081732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
+
+  create_table "certified_presences", force: :cascade do |t|
+    t.bigint "owner_id"
+    t.string "device_identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_identifier"], name: "index_certified_presences_on_device_identifier"
+    t.index ["owner_id"], name: "index_certified_presences_on_owner_id"
+  end
 
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
@@ -55,6 +64,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_125622) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lonlat"], name: "index_providers_on_lonlat", using: :gist
+  end
+
+  create_table "sipario_sessions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "device_identifier"
+    t.text "nearby_identifiers"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sipario_sessions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
