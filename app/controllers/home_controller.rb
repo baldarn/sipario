@@ -10,7 +10,11 @@ class HomeController < ApplicationController
   def index
   end
 
-  def download_apk
-    send_file("#{Rails.root}/public/sipario.apk")
+  def download_android
+    send_file("#{Rails.root}/mobile_apps/sipario.apk")
+  end
+
+  def download_apple
+    send_file("#{Rails.root}/mobile_apps/sipario.app")
   end
 end

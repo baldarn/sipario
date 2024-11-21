@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "home#index"
 
-  get "download_apk" => "home#download_apk"
+  get "download_android" => "home#download_android"
+  get "download_apple" => "home#download_apple"
 
   resources :point_events, only: [ :index ]
 

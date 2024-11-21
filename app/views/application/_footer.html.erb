@@ -7,6 +7,12 @@
       <% if ENV['APP_VERSION'].present? %>
         <span class="ms-1">v<%= ENV['APP_VERSION'] %></span>
       <% end %>
+      <a href="download_android">
+        <%= image_tag "android.svg", aria: { hidden: true }, size: 45, class: "bi d-block mx-auto mb-1" %>
+      </a>
+      <a href="download_apple">
+        <%= image_tag "apple.svg", aria: { hidden: true }, size: 45, class: "bi d-block mx-auto mb-1" %>
+      </a>
     </div>
     <div class="nav col-md-4 justify-content-end list-unstyled d-flex">
       <a href="https://www.iubenda.com/privacy-policy/83684936" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">
