@@ -24,6 +24,8 @@ module Owners
         postal_code: @user.club_postal_code,
         municipality: @user.club_municipality,
         province: @user.club_province,
+        country: @user.country,
+        lonlat: point_generator,
         tax_code: @user.club_tax_code,
         telephone: @user.club_telephone
       )
@@ -43,6 +45,14 @@ module Owners
     # If you have extra params to permit, append them to the sanitizer.
     def configure_account_update_params
       devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name])
+    end
+
+    def point_generator
+      full_address = [@user.club_address, @user.club_postal_code, @user.club_municipality, @user.country].join(", ")
+      results = Geocoder.search(full_address)
+      coordinates = results.first.coordinates
+      factory = RGeo::Geographic.simple_mercator_factory
+      factory.point(coordinates.reverse) # GIS receives longitude then latitude unlike what is the convention
     end
   end
 end
