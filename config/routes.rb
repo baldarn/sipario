@@ -9,11 +9,21 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions",
+    passwords: "users/passwords",
+    unlocks: "users/unlocks",
+    confirmations: "users/confirmations"
+  }
   resources :sipario_sessions, only: [ :create ]
 
   devise_for :owners, controllers: {
-    registrations: "owners/registrations"
+    registrations: "owners/registrations",
+    sessions: "owners/sessions",
+    passwords: "owners/passwords",
+    unlocks: "owners/unlocks",
+    confirmations: "owners/confirmations"
   }
 
   resources :certified_presences, only: [ :create ]

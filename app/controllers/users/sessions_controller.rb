@@ -3,12 +3,14 @@
 module Users
   class SessionsController < Devise::SessionsController
     skip_forgery_protection
-    respond_to :json
 
     private
 
     def respond_with(_resource, _opts = {})
-      render json: { message: "Logged." }, status: :ok
+      respond_to do |format|
+        format.html { super }
+        format.json { render json: { message: "Logged." }, status: :ok }
+      end
     end
 
     def respond_to_on_destroy
@@ -16,11 +18,17 @@ module Users
     end
 
     def log_out_success
-      render json: { message: "Logged out." }, status: :ok
+      respond_to do |format|
+        format.html { super }
+        format.json { render json: { message: "Logged out." }, status: :ok }
+      end
     end
 
     def log_out_failure
-      render json: { message: "Logged out failure." }, status: :unauthorized
+      respond_to do |format|
+        format.html { super }
+        format.json { render json: { message: "Logged out failure." }, status: :unauthorized }
+      end
     end
   end
 end
