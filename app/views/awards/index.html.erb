@@ -19,7 +19,7 @@
   <tbody>
     <% @awards.each do |award| %>
       <tr>
-        <td><%= award.name %></td>
+        <td><%= link_to award.name, provider_award_path(@provider, award) %></td>
         <td><%= truncate(award.description, length: 25) %></td>
         <td><%= award.points_to_redeem %></td>
         <td>
