@@ -9,7 +9,7 @@ class Owner < ApplicationRecord
 
   has_many :certified_presences
 
-  attr_accessor :registering, :provider_name, :provider_minutes_for_points, :provider_lonlat
+  attr_accessor :registering, :provider_name, :provider_minutes_for_points, :provider_lat, :provider_lon
 
-  validates :provider_name, :provider_minutes_for_points, :provider_lonlat, presence: true, if: -> { registering == true }
+  validates :provider_name, :provider_minutes_for_points, :provider_lon, :provider_lat, presence: true, if: -> { registering == true }
 end

@@ -9,9 +9,10 @@
                 autofocus: true ,
                 input_html: { autocomplete: "email" }%>
                 
-    <%= f.input :provider_name, required: true%>
-    <%= f.input :provider_lonlat, required: true%>
-    <%= f.input :provider_minutes_for_points, required: true%>
+    <%= f.input :provider_name, required: true %>
+    <%= f.input :provider_lon, required: true %>
+    <%= f.input :provider_lat, required: true %>
+    <%= f.input :provider_minutes_for_points, required: true %>
     <%= f.input :password,
                 required: true,
                 hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length),

@@ -14,6 +14,10 @@ class AwardsController < BaseOwnerController
     @award = @provider.awards.new
   end
 
+  def show
+    @award = @provider.awards.find(params[:id])
+  end
+
   def edit
     @award = @provider.awards.find(params[:id])
   end

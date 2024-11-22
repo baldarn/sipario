@@ -61,6 +61,8 @@ en:
       user:
         name: Name
         email: Email
+        provider_lon: Provider Longitude
+        provider_lat: Provider Latitude
       awards:
         name: Name
         description: Description

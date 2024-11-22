@@ -21,9 +21,11 @@ module Owners
 
       return turbo_stream if @owner.errors.present?
 
+      lonlat = "POINT(#{@owner.provider_lon} #{@owner.provider_lat})"
+
       @provider = Provider.create!(
         name: @owner.provider_name,
-        lonlat: @owner.provider_lonlat,
+        lonlat: lonlat,
         minutes_for_points: @owner.provider_minutes_for_points
       )
       @owner.provider = @provider
@@ -34,7 +36,10 @@ module Owners
       provider = @owner.provider
 
       @owner.provider_name = provider.name
-      @owner.provider_lonlat = provider.lonlat
+
+      @owner.provider_lon = @provider.lonlat.x
+      @owner.provider_lat = @provider.lonlat.y
+
       @owner.provider_minutes_for_points = provider.minutes_for_points
 
       super
@@ -46,9 +51,11 @@ module Owners
 
       return turbo_stream if @owner.errors.present?
 
+      lonlat = "POINT(#{@owner.provider_lon} #{@owner.provider_lat})"
+
       @owner.provider.update(
         name: @owner.provider_name,
-        lonlat: @owner.provider_lonlat,
+        lonlat: lonlat,
         minutes_for_points: @owner.provider_minutes_for_points
       )
     end
@@ -57,14 +64,14 @@ module Owners
     def configure_sign_up_params
       devise_parameter_sanitizer.permit(
         :sign_up,
-        keys: %i[provider_name provider_minutes_for_points provider_lonlat registering]
+        keys: %i[provider_name provider_minutes_for_points provider_lat provider_lon registering]
       )
     end
 
     def configure_account_update_params
       devise_parameter_sanitizer.permit(
         :account_update,
-        keys: %i[provider_name provider_minutes_for_points provider_lonlat registering]
+        keys: %i[provider_name provider_minutes_for_points provider_lat provider_lon registering]
       )
     end
   end
