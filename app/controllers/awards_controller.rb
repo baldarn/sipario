@@ -46,14 +46,14 @@ class AwardsController < BaseOwnerController
   end
 
   def consume
-    @point_event = PointEvent.where(consume_code: params[:award_consume_code])
+    @point_event = @provider.point_events.where(consume_code: params[:award_consume_code]).first
 
-    if !@point_event.used
-      point_event.update(used: true)
+    if @point_event.present? && !@point_event.used
+      @point_event.update(used: true)
 
-      redirect_to point_events_url, flash: { success: I18n.t("awards.consumed") }
+      head :ok
     else
-      redirect_to point_events_url, flash: { success: I18n.t("awards.already_consumed") }
+      head :unprocessable_entity
     end
   end
 

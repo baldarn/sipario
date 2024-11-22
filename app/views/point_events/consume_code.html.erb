@@ -1,3 +1,13 @@
 <h2><%= I18n.t('point_events.header') %></h2>
 
-<%= raw(@qr_svg.html_safe) %>
+<h2><%= @point_event.provider.name %></h2>
+
+<h2><%= @point_event.award.name %> | <%= @point_event.award.description %></h2>
+
+<%= raw(RQRCode::QRCode.new(
+      provider_award_consume_url(
+        provider_id: @point_event.provider, 
+        award_id: @point_event.award,
+        award_consume_code: @point_event.consume_code
+      )
+    ).as_svg.html_safe) %>
