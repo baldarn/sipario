@@ -30,8 +30,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_100259) do
     t.string "device_identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_certified_presences_on_created_at"
     t.index ["device_identifier"], name: "index_certified_presences_on_device_identifier"
     t.index ["owner_id"], name: "index_certified_presences_on_owner_id"
+    t.index ["updated_at"], name: "index_certified_presences_on_updated_at"
   end
 
   create_table "jwt_denylist", force: :cascade do |t|
@@ -73,10 +75,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_100259) do
     t.bigint "user_id"
     t.bigint "sipario_session_id"
     t.bigint "award_id"
+    t.uuid "consume_code"
+    t.boolean "used", default: false, null: false
     t.integer "points", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["award_id"], name: "index_point_events_on_award_id"
+    t.index ["consume_code"], name: "index_point_events_on_consume_code"
     t.index ["provider_id"], name: "index_point_events_on_provider_id"
     t.index ["sipario_session_id"], name: "index_point_events_on_sipario_session_id"
     t.index ["user_id"], name: "index_point_events_on_user_id"

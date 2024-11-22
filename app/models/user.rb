@@ -20,6 +20,7 @@ class User < ApplicationRecord
     point_events.create(
       provider: award.provider,
       award:,
+      consume_code: SecureRandom.uuid,
       points: - award.points_to_redeem
       )
   end

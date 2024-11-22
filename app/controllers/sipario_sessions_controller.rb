@@ -14,6 +14,6 @@ class SiparioSessionsController < ApplicationController
   private
 
   def sipario_session_params
-    params.require(:sipario_session).permit(:device_identifier, :nearby_identifiers)
+    params.require(:sipario_session).permit(:device_identifier, :nearby_identifiers, :provider_id)
   end
 end

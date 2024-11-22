@@ -45,6 +45,18 @@ class AwardsController < BaseOwnerController
     redirect_to provider_awards_url(@provider), flash: { success: I18n.t("awards.destroyed") }
   end
 
+  def consume
+    @point_event = PointEvent.where(consume_code: params[:award_consume_code])
+
+    if !@point_event.used
+      point_event.update(used: true)
+
+      redirect_to point_events_url, flash: { success: I18n.t("awards.consumed") }
+    else
+      redirect_to point_events_url, flash: { success: I18n.t("awards.already_consumed") }
+    end
+  end
+
   def redeem
     award = Award.find(params[:award_id])
 

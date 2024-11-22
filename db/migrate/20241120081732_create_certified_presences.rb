@@ -8,6 +8,9 @@ class CreateCertifiedPresences < ActiveRecord::Migration[8.0]
       t.timestamps
 
       t.index :device_identifier
+
+      t.index :updated_at
+      t.index :created_at
     end
   end
 end

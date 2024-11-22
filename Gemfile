@@ -46,6 +46,7 @@ gem "activerecord-postgis-adapter", git: "https://github.com/StoneGod/activereco
 gem "sassc-rails"
 gem "bootstrap", "~> 5.1"
 gem "simple_form"
+gem "rqrcode"
 
 # Pagination
 gem "kaminari"

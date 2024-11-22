@@ -7,9 +7,14 @@ class CreatePointEvents < ActiveRecord::Migration[8.0]
       t.belongs_to :sipario_session
       t.belongs_to :award
 
+      t.uuid :consume_code
+      t.boolean :used, null: false, default: :false
+
       t.integer :points, null: false
 
       t.timestamps
+
+      t.index :consume_code
     end
   end
 end

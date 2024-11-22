@@ -19,14 +19,14 @@ module Owners
 
     def log_out_success
       respond_to do |format|
-        format.html { super }
+        format.html { redirect_to root_url }
         format.json { render json: { message: "Logged out." }, status: :ok }
       end
     end
 
     def log_out_failure
       respond_to do |format|
-        format.html { super }
+        format.html { redirect_to root_url }
         format.json { render json: { message: "Logged out failure." }, status: :unauthorized }
       end
     end

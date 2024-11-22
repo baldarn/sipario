@@ -34,11 +34,14 @@ Rails.application.routes.draw do
   get "download_android" => "home#download_android"
   get "download_apple" => "home#download_apple"
 
-  resources :point_events, only: [ :index ]
+  resources :point_events, only: [ :index ] do
+    get :consume_code
+  end
 
   resources :providers do
     resources :awards do
       get :redeem
+      get :consume
     end
 
     collection do

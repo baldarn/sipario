@@ -62,24 +62,27 @@ cp = CertifiedPresence.create!(
     nearby_identifiers: "321321,567567"
   )
 
-  user.point_events.create!(
+  point_event = user.point_events.create!(
     provider:,
     sipario_session:,
     points: 1
   )
+
+  sipario_session.update(point_event:)
 end
 
 10.times do
   sipario_session = SiparioSession.create!(
     user:,
     provider: provider_2,
-    device_identifier:,
-    nearby_identifiers: "321321,567567"
+    device_identifier:
   )
 
-  user.point_events.create!(
+  point_event = user.point_events.create!(
     provider: provider_2,
     sipario_session:,
     points: 1
   )
+
+  sipario_session.update(point_event:)
 end

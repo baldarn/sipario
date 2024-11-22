@@ -11,15 +11,23 @@
       <th scope="col"><%= I18n.t('activerecord.attributes.point_events.award') %></th>
       <th scope="col"><%= I18n.t('activerecord.attributes.point_events.points') %></th>
       <th scope="col"><%= I18n.t('activerecord.attributes.point_events.created_at') %></th>
+      <th scope="col"><%= I18n.t('actions') %></th>
     </tr>
   </thead>
   <tbody>
     <% @point_events.each do |point_event| %>
       <tr>
         <td><%= link_to point_event.provider.name, provider_path(point_event.provider) %></td>
-        <td> <%= point_event.award&.name %></td>
+        <td><%= point_event.award&.name %></td>
         <td><%= point_event.points %></td>
         <td><%= point_event.created_at %></td>
+        <td>
+          <% if point_event.award.present? && !point_event.used %>
+            <%= link_to point_event_consume_code_path(point_event), class: 'text-decoration-none' do %>
+              <%= image_tag "qr.svg", aria: { hidden: true }, size: 24 %>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
