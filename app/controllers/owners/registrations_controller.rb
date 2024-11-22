@@ -2,7 +2,11 @@
 
 module Owners
   class RegistrationsController < Devise::RegistrationsController
-    before_action :set_provider, only: %i[edit destroy]
+    before_action :configure_sign_up_params, only: [ :create ]
+    before_action :configure_account_update_params, only: [ :update ]
+
+    before_action :set_provider, only: %i[edit destroy update]
+
 
     def set_provider
       @provider = current_owner.provider
@@ -15,34 +19,53 @@ module Owners
       params[:owner][:registering] = true
       super
 
-      return turbo_stream if @user.errors.present?
+      return turbo_stream if @owner.errors.present?
 
       @provider = Provider.create!(
-        name: @user.club_name,
-        email: @user.club_email,
-        address: @user.club_address,
-        postal_code: @user.club_postal_code,
-        municipality: @user.club_municipality,
-        province: @user.club_province,
-        tax_code: @user.club_tax_code,
-        telephone: @user.club_telephone
+        name: @owner.provider_name,
+        lonlat: @owner.provider_lonlat,
+        minutes_for_points: @owner.provider_minutes_for_points
       )
-      @user.club = @club
-      @user.save
+      @owner.provider = @provider
+      @owner.save
+    end
+
+    def edit
+      provider = @owner.provider
+
+      @owner.provider_name = provider.name
+      @owner.provider_lonlat = provider.lonlat
+      @owner.provider_minutes_for_points = provider.minutes_for_points
+
+      super
+    end
+
+    def update
+      params[:owner][:registering] = true
+      super
+
+      return turbo_stream if @owner.errors.present?
+
+      @owner.provider.update(
+        name: @owner.provider_name,
+        lonlat: @owner.provider_lonlat,
+        minutes_for_points: @owner.provider_minutes_for_points
+      )
     end
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
       devise_parameter_sanitizer.permit(
         :sign_up,
-        keys: %i[first_name last_name registering club_name club_email club_address club_postal_code club_municipality
-                  club_province club_tax_code club_telephone _rucaptcha]
+        keys: %i[provider_name provider_minutes_for_points provider_lonlat registering]
       )
     end
 
-    # If you have extra params to permit, append them to the sanitizer.
     def configure_account_update_params
-      devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name])
+      devise_parameter_sanitizer.permit(
+        :account_update,
+        keys: %i[provider_name provider_minutes_for_points provider_lonlat registering]
+      )
     end
   end
 end

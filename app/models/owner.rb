@@ -5,11 +5,11 @@ class Owner < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
-  belongs_to :provider
+  belongs_to :provider, optional: true
 
   has_many :certified_presences
 
-  attr_accessor :registering, :provider_name, :_rucaptcha
+  attr_accessor :registering, :provider_name, :provider_minutes_for_points, :provider_lonlat
 
-  validates :provider_name, presence: true, if: -> { registering == true }
+  validates :provider_name, :provider_minutes_for_points, :provider_lonlat, presence: true, if: -> { registering == true }
 end
