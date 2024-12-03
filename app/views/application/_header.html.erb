@@ -22,7 +22,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<%= destroy_owner_session_url %>" class="nav-link text-secondary">
+            <a href="<%= destroy_owner_session_url %>" class="nav-link text-secondary" data-turbo="false">
               <%= image_tag "door.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
               <%= I18n.t('sign_out' )%>
             </a>
@@ -48,7 +48,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<%= destroy_user_session_url %>" class="nav-link text-secondary">
+            <a href="<%= destroy_user_session_url %>" class="nav-link text-secondary" data-turbo="false">
               <%= image_tag "door.svg", aria: { hidden: true }, size: 24, class: "bi d-block mx-auto mb-1" %>
               <%= I18n.t('sign_out' )%>
             </a>
