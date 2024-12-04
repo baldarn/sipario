@@ -101,6 +101,7 @@ GEM
       popper_js (>= 2.11.8, < 3)
     brakeman (6.2.2)
       racc
+    browser (2.7.1)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -162,6 +163,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hotwire_native_rails (0.3.2)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.3)
@@ -458,11 +460,13 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.1)
   brakeman
+  browser
   capybara
   debug
   devise (~> 4.9)
   devise-i18n
   devise-jwt
+  hotwire_native_rails (~> 0.3.2)
   importmap-rails
   jbuilder
   kamal
