@@ -76,3 +76,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "hotwire_native_rails", "~> 0.3.2"
+gem "browser"

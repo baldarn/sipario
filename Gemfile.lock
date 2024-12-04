@@ -101,6 +101,7 @@ GEM
       popper_js (>= 2.11.8, < 3)
     brakeman (6.2.2)
       racc
+    browser (2.7.1)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -162,6 +163,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hotwire_native_rails (0.3.2)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.3)
@@ -205,7 +207,7 @@ GEM
       kaminari
       rails
     language_server-protocol (3.17.0.3)
-    logger (1.6.1)
+    logger (1.6.2)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -360,7 +362,7 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.3.2)
-    selenium-webdriver (4.26.0)
+    selenium-webdriver (4.27.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -458,11 +460,13 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.1)
   brakeman
+  browser
   capybara
   debug
   devise (~> 4.9)
   devise-i18n
   devise-jwt
+  hotwire_native_rails (~> 0.3.2)
   importmap-rails
   jbuilder
   kamal
