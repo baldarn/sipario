@@ -97,7 +97,8 @@ builder:
   #   - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
-# ssh:
+ssh:
+  port: 2222
 #   user: app
 
 # Use accessory services (secrets come from .kamal/secrets).
