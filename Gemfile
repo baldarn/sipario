@@ -44,7 +44,7 @@ gem "devise-jwt"
 gem "activerecord-postgis-adapter", git: "https://github.com/StoneGod/activerecord-postgis-adapter.git", branch: "rails-8"
 
 gem "sassc-rails"
-gem "bootstrap", "~> 5.1"
+gem "bootstrap", "~> 5.3"
 gem "simple_form"
 gem "rqrcode"
 
